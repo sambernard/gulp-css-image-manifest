@@ -1,7 +1,7 @@
 {
     "name": "gulp-css-image-manifest",
     "description": "Gulp's task for transform all resources found in a CSS into base64-encoded data URI strings",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "Sam Bernard <sam@madeinhaus.com>",
     "main": "./src/index.js",
     "keywords": [
