@@ -17,7 +17,7 @@ var PLUGIN_NAME = 'gulp-css-image-manifest';
 // match[0] = entire match
 // match[1] = url
 // match[2] = optional parameters
-var rImages = /url(?:\(['|"]?)(.*?)(?:['|"]?\)).*(?:\/\*preload:([a-zA-Z_-]+)\*\/)?/ig;
+var rImages = /url(?:\(['|"]?)(.*?)(?:['|"]?\)).*(?:\s+\/\*preload:([a-zA-Z_-]+)\*\/)?/ig;
 
 var defaults = {
     extensionsAllowed: ['png', 'jpg', 'jpeg', 'gif', 'svg'],
@@ -83,10 +83,17 @@ function gulpExtractImages(opts) {
                     scanResource(result[1], file, opts, function (fileRes) {
                         if (undefined !== fileRes) {
 
+                            var tags = [];
+
+                            if (result[2]) {
+                                tags = result[2].split(',');
+                            }
+
                             // Store
                             manifest.files[result[1]] = {
                                 path: (result[1].indexOf('../') === 0 ? result[1].replace('../', '/') : result[1]),
-                                size: fileRes.contents.length
+                                size: fileRes.contents.length,
+                                tags: tags
                             };
                         }
 
